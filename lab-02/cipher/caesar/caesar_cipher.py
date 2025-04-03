@@ -6,12 +6,20 @@ class CaesarCipher:
         alphabet_len=len(self.alphabet)
         text=text.upper()
         encrypted_text=[]
+        
         for letter in text:
-            letter_index=self.alphabet.index(letter)
-            output_index=(letter_index+key)%alphabet_len
-            output_letter=self.alphabet[output_index]
-            encrypted_text.append(output_letter)
+            if letter.isdigit():
+                encrypted_text.append(letter)
+            elif letter.isalpha():
+                letter_index=self.alphabet.index(letter)
+                output_index=(letter_index+key)%alphabet_len
+                output_letter=self.alphabet[output_index]
+                encrypted_text.append(output_letter)
+            else:
+                encrypted_text.append(letter)
+                
         return "".join(encrypted_text)
+    
     def decrypt_text(self,text,key:int)->str:
         alphabet_len=len(self.alphabet)
         text=text.upper()
